@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+
+
+{% block body %}
+<!-- Blueprint header -->
+<!-- Compare basket -->
+<div class="compare-basket">
+  <button class="action action---button action--compare"><i class="fa fa-check"></i><span class="action__text">Compare</span></button>
+</div>
+
+
+
+<!-- Bottom bar with filter and cart info -->
+<div class="bar">
+  <div class="filter">
+    <span class="filter__label">Filter: </span>
+    <button class="action filter__item filter__item--selected" data-filter="*">All</button>
+
+    {% for category in category_list %}
+
+    <button class="action filter__item" data-filter=".{{category}}">
+      <i class="icon icon--{{category}}"></i>
+      <span class="action__text">{{category}}</span>
+    </button>
+
+    {% endfor %}
+
+  </div>
+<a href="{% url 'cart' %}" class="">  <button class="cart"> <i class=" cart__icon fa fa-shopping-cart "></i>
+      <span class="text-hidden">Shopping cart</span>
+      <span class="cart__count">{{cartItems}}</span>
+  </button></a>
+</div>
+
+<div class="view">
+
+  <!-- Grid -->
+
+  <section class="grid grid--loader">
+    <!-- The cursor elements -->
+    <div class="cursor cursor--small"></div>
+    <canvas class="cursor cursor--canvas" resize></canvas>
+    <!-- Loader -->
+    <img class="grid__loader" src="{% static 'images/grid.svg' %}" width="60" alt="Loader image" />
+    <!-- Grid sizer for a fluid Isotope (Masonry) layout -->
+    <div class="grid__sizer"></div>
+    <!-- Grid items -->
+
+
+    {% for product in products %}
+    <div class="grid__item {{product.category}} product">
+
+
+
+      <div class="slider product__image">
+        <div class="slider__item"><img src="{{product.imageURL1}}" /></div>
+        <div class="slider__item"><img src="{{product.imageURL2}}" /></div>
+        <div class="slider__item"><img src="{{product.imageURL3}}" /></div>
+        <div class="slider__item"><img src="{{product.imageURL4}}" /></div>
+      </div>
+
+
+      <div class="product__info  meta">
+        <span class=" product__title meta__title">{{product.name}}</span>
+        <img class="product__image extra" src="{{product.imageURL1}}" alt="{{product.name}}" />
+        <span class="product__year extra" style="color: #000">{{product.description}}</span>
+        <span class="product__price  meta__price" >R{{product.price|floatformat:2}}</span>
+        <!--       <span class="product__alcohol extra highlight">{{product.description}}</span> -->
+
+      </div>
+      <label class="action action--button action--compare-add"><input class="check-hidden" type="checkbox" /><i class="fa fa-plus"></i><i class="fa fa-check"></i><span class="action__text--invisible">Add to compare</span></label>
+      <button data-product={{product.id}} data-action="add" class="action action--button action--compare-buy action--buy update-cart"><i class="fa fa-shopping-cart"></i><span class="action__text--invisible">Add to cart</span></button>
+    </div>
+
+    {% endfor %}
+
+    <!-- /grid-->
+</div>
+<!-- /view -->
+<!-- product compare wrapper -->
+<section class="compare">
+  <button class="action action--close"><i class="fa fa-remove"></i><span class="action__text action__text--invisible">Close comparison overlay</span></button>
+</section>
+
+
+
+{% endblock body %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+
+<!-- Main -->
+<div class="view">
+
+    <!-- Grid -->
+
+    <section class="grid" id="main">
+        <header>
+            <span class="avatar"><img {% if request.user.customer.profile_pic %} src="{{request.user.customer.profile_pic.url}}" {% else %} src="{% static 'images/dummy.jpg' %}" {% endif %} alt="" /></span>
+            <h3>{{user.first_name}}&nbsp;{{user.last_name}}</h3>
+            <h5 style="text-decoration: underline; font-weight: 400">{{user.username}}</h5>
+<br>
+            <ul class="icons">
+                <li><a title="Edit Profile" href="{% url 'account:edit_profile' %}">
+                        <ion-icon name="create-outline" size="large">Edit Information</ion-icon>
+                    </a></li>
+                <li><a title="Change Password" href="{% url 'account:change_password' %}">
+                        <ion-icon name="lock-open-outline" size="large">Update Password</ion-icon>
+                    </a></li>
+            </ul>
+        </header>
+        <br>
+        <h2>Previous orders</h2><br>
+        <table>
+            <thead>
+                <tr>
+                    <th class="action--text">Transaction ID</th>
+                    <th class="action--text">Date Ordered</th>
+                    <th class="action--text">Order Total</th>
+                    <th class="action--text">Order Status </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+
+                <tr class="">
+                    <td>
+                        <h4 class="action--text">{{order.transaction_id}}</h4>
+                    </td>
+
+                    <td>
+                        <h4 class="action--text">{{order.date_ordered}}
+                        </h4>
+                    </td>
+                    <td>
+                        <h4 class="action--text">R{{ order.get_cart_total}}</h4>
+                    </td>
+                    <td>
+                        {% if order.complete %}
+                        <p class="action--text">Order Completed</p>
+                        {% endif %}
+                        {% if not order.complete %}
+                        <p class="action--text">Order Pending</p>
+                        {% endif %}
+                    </td>
+
+                    <td class="total"><strong class="action--text">{{item.get_total}}</strong></td>
+                </tr><!-- END TR-->
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+
+    </section>
+
+
+</div>
+<script type="text/javascript">
+    console.log("You have reached the Profile page")
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="view">
+  <section class="grid">
+    <h2>Edit Profile</h2>
+                <form method="POST" action="" enctype="multitype/form-data" noovalidate>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="actions">
+                        <button class="action--button-btn action" value=Submit>
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+        </section>
+    </div>
+
+    <script type="text/javascript">
+      console.log("You have reached the edit profile page")
+    </script>
+
+{% endblock %}

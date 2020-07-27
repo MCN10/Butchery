@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+{% block body %}
+<div class="view">
+
+    <!-- Grid -->
+
+    <section class="grid grid--loader">
+        <table class="">
+            <thead>
+                <tr class="text-center">
+                    <th>
+                        <h4 class="action--text">&nbsp;</h4>
+                    </th>
+                    <th>
+                        <h4 class="action--text">Item</h4>
+                    </th>
+                    <th>
+                        <h4 class="action--text">Price</h4>
+                    </th>
+                    <th>
+                        <h4 class="action--text">Quantity</h4>
+                    </th>
+                    <th>
+                        <h4 class="action--text">Update</h4>
+                    </th>
+                    <th>
+                        <h4 class="action--text">Total</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items%}
+
+                <tr>
+                    <td>
+                        <img class="img slider" src="{{ item.product.imageURL1 }}" style="width: 200px; height: 200px" />
+                    </td>
+
+                    <td>
+                        <strong class="action--text">{{item.product.name}}</strong>
+                    </td>
+                    <td>
+                        <strong class="action--text">R{{item.product.price|floatformat:2}}</strong>
+                    </td>
+
+                    <td>
+                        <strong class="action--text">{{item.quantity}}</strong>
+                    </td>
+                    <td>
+                        <ion-icon data-product={{item.product.id}} data-action="add" class="chg-quantity update-cart" size="large" name="chevron-up-circle-outline"></ion-icon>
+                        <hr>
+                        <ion-icon data-product={{item.product.id}} data-action="remove" class="chg-quantity update-cart" size="large" name="chevron-down-circle-outline"></ion-icon>
+                    </td>
+                    <td>
+                        <h4><strong class="action--text">{{item.get_total}}</strong></h4>
+                    </td>
+                </tr><!-- END TR-->
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        <div class="row justify-content-end">
+            <div class=" cart-wrap ftco-animate">
+                <div class="cart-total mb-3">
+                  <br>
+                    <h3>Cart Totals</h3>
+                    <hr>
+
+                    <p class="d-flex">
+                        <span>Items: &nbsp;</span>
+                        <span><strong>{{order.get_cart_items}}</strong></span>
+                    </p>
+                    <p class="d-flex total-price">
+                        <span>Total:&nbsp; </span>
+                        <span><strong> R{{order.get_cart_total|floatformat:2}} </strong></span>
+                    </p>
+                    <hr>
+
+                </div>
+                <p><a href="{% url 'store' %}" class="btn action--button-btn">Continue Shopping&nbsp;&nbsp;</a>&nbsp;{% if order.get_cart_total%}<a {% if user.is_authenticated %} href="{% url 'checkout' %}" {% else %} href="{% url 'account:register' %}" {% endif %}class="btn action--button-btn">Proceed to Checkout &nbsp;&nbsp; </a>
+                    {% endif %}</p>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
