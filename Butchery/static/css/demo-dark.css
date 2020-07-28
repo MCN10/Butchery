@@ -6,8 +6,8 @@
 	 border-radius: 100%;
 	 position: absolute;
 	 pointer-events: none;
-	 background: #000;
-	 box-shadow: 10px 10px 30px #000, -10px -10px 30px #000;
+	 background: #fff;
+	 box-shadow: 10px 10px 30px #fff, -10px -10px 30px #fff;
 	 transform: translate(-50%, -50%);
 	 animation: colorgen 1s infinite;
    opacity: 0.5;
@@ -88,7 +88,7 @@ body {
     color: #fff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-image: url("../images/bg.jpg");
+    background-image: url("../images/bg3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: exclusion;
