@@ -107,20 +107,23 @@ def logout_user(request):
 
 
 def loginPage(request):
-
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, ("You are now logged in."))
-            return HttpResponseRedirect(request.POST.get('full_path'))
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, ("You are now logged in."))
+                return redirect('store:store')
+            else:
+                messages.success(request, ("Error! Please try again..."))
+                return redirect('account:login')
         else:
-            messages.success(request, ("Error! Please try again..."))
-            return redirect('account:login')
+            return render(request, 'account/login.html', {})
     else:
-        return render(request, 'account/login.html', {})
+        messages.success(request, ("You are now logged in."))
+        return redirect('store:store')
 
 
 

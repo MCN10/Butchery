@@ -24,7 +24,7 @@
   <!-- Flaticon icons -->
   <link rel="stylesheet" type="text/css" href="{% static 'font/flaticon.css' %}" />
   <!-- General demo styles & header -->
-  <link id="mystylesheet" rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+  <link id="store_stylesheet" rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
   <!-- Flickity gallery styles -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/flickity.css' %}" />
 
@@ -89,7 +89,7 @@
   <!-- Blueprint header -->
   <header class="bp-header ">
 
-    <span><img id="spinner" src="{% static 'images/III-light.gif' %}" style="width: 5%"/><sup> rd</sup>Axis<span class="bp bp-icon-about" data-content="Ready to eat?"></span></span>
+    <span><img id="store_spinner" src="{% static 'images/III-light.gif' %}" style="width: 5%"/><sup> rd</sup>Axis<span class="bp bp-icon-about" data-content="Ready to eat?"></span></span>
 
     {% if user.is_authenticated %}
     <h5>Logged in as: {{user.username}}
@@ -102,10 +102,10 @@
 
         {% endif %}
         <nav>
-          <a href="{% url 'store' %}" title="About Us" ><ion-icon name="information-circle-outline" size="large"></ion-icon></a>
-          <a href="{% url 'contact' %}" title="Contact" ><ion-icon name="mail-outline" size="large"></ion-icon></a>
-          <a href="{% url 'store' %}" title="Online Store" ><ion-icon name="home-outline" size="large"></ion-icon></a>
-          <a href="{% url 'cart' %}"  tile="My Cart"data-info=""><ion-icon name="cart-outline" size="large"></ion-icon></a>
+          <a href="{% url 'store:store' %}" title="About Us" ><ion-icon name="information-circle-outline" size="large"></ion-icon></a>
+          <a href="{% url 'store:contact' %}" title="Contact" ><ion-icon name="mail-outline" size="large"></ion-icon></a>
+          <a href="{% url 'store:store' %}" title="Online Store" ><ion-icon name="home-outline" size="large"></ion-icon></a>
+          <a href="{% url 'store:cart' %}"  tile="My Cart"data-info=""><ion-icon name="cart-outline" size="large"></ion-icon></a>
           {% if user.is_authenticated %}
           <a href="{% url 'account:profile' %}" title="My  Profile"><ion-icon name="person-outline" size="large"></ion-icon></a>
           <a href="{% url 'account:logout' %}" title="Log Out"><ion-icon name="log-out-outline" size="large"></ion-icon></a>
@@ -168,23 +168,23 @@
 
 
 
-    var theme = localStorage.getItem('theme')
-    var spinner = localStorage.getItem('spinner')
+    var store_theme = localStorage.getItem('store_theme')
+    var store_spinner = localStorage.getItem('store_spinner')
 
-    console.log("Theme:", theme)
-    console.log("Spinner:", spinner)
-      if (theme == null){
+    console.log("store_theme:", store_theme)
+    console.log("store_spinner:", store_spinner)
+      if (store_theme == null){
         lightMode()
       }else{
-        document.getElementById('mystylesheet').href = theme
+        document.getElementById('store_stylesheet').href = store_theme
 
       }
 
 
-      if (spinner == null){
+      if (store_spinner == null){
         lightMode()
       }else{
-        document.getElementById('spinner').src = spinner
+        document.getElementById('store_spinner').src = store_spinner
 
       }
 
@@ -195,14 +195,14 @@
           }
               function swapStyleDark(){
                   console.log("Dark Style Ran")
-                  document.getElementById('mystylesheet').href = "{% static 'css/demo-dark.css' %}"
-                  localStorage.setItem('theme', "{% static 'css/demo-dark.css' %}")
+                  document.getElementById('store_stylesheet').href = "{% static 'css/demo-dark.css' %}"
+                  localStorage.setItem('store_theme', "{% static 'css/demo-dark.css' %}")
                 }
 
               function swapImageDark(){
                 console.log("Dark Image Ran")
-                document.getElementById('spinner').src = "{% static 'images/III-dark.gif' }"
-                localStorage.setItem('spinner', "{% static 'images/III-dark.gif' %}")
+                document.getElementById('store_spinner').src = "{% static 'images/III-dark.gif' }"
+                localStorage.setItem('store_spinner', "{% static 'images/III-dark.gif' %}")
 
                 }
 
@@ -214,14 +214,14 @@
           }
           function swapStyleLight(){
             console.log("Light Style Ran")
-            document.getElementById('mystylesheet').href = "{% static 'css/demo.css' %}"
-            localStorage.setItem('theme', "{% static 'css/demo.css' %}")
+            document.getElementById('store_stylesheet').href = "{% static 'css/demo.css' %}"
+            localStorage.setItem('store_theme', "{% static 'css/demo.css' %}")
           }
 
           function swapImageLight(){
             console.log("Light Image Ran")
-            document.getElementById('spinner').src = "{% static 'images/III-light.gif' %}"
-            localStorage.setItem('spinner', "{% static 'images/III-light.gif' %}")
+            document.getElementById('store_spinner').src = "{% static 'images/III-light.gif' %}"
+            localStorage.setItem('store_spinner', "{% static 'images/III-light.gif' %}")
           }
         </script>
 

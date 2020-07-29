@@ -28,8 +28,8 @@
                             </div>
                             <br>
 
-                            <p class="action--text"><a href="{% url 'cart' %}" class="btn action--button-btn">Return to Cart</a>
-                                <a href="{% url 'store' %}" class="btn action--button-btn">Continue Shopping</a></p>
+                            <p class="action--text"><a href="{% url 'store:cart' %}" class="btn action--button-btn">Return to Cart</a>
+                                <a href="{% url 'store:store' %}" class="btn action--button-btn">Continue Shopping</a></p>
         </div>
     </section>
 
@@ -164,7 +164,7 @@
                 cart = {}
                 document.cookie = 'cart=' + JSON.stringify(cart) + ";domain;path=/"
 
-                window.location.href = "{% url 'store' %}"
+                window.location.href = "{% url 'store:store' %}"
             })
     }
 

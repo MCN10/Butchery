@@ -22,7 +22,7 @@
 <body>
     <!-- navigation -->
     <nav class="pages-nav">
-        <div class="pages-nav__item"><a class="link " href="">Home</a></div>
+        <div class="pages-nav__item"><a class="link " href="{% url 'store:store' %}">IIIrd Axis</a></div>
         <div class="pages-nav__item"><a class="link " href="">Documentation</a></div>
         <div class="pages-nav__item"><a class="link " href="">Manuals</a></div>
         <div class="pages-nav__item"><a class="link " href="">Software</a></div>
@@ -58,6 +58,10 @@
                     </a>
                     {% endif %}
                     <nav>
+                      <a href="" title="Exit Store">
+                          <ion-icon name="chevron-left-circle-outline" size="large"></ion-icon>
+                      </a>
+
                         <a href="" title="Information Center">
                             <ion-icon name="information-circle-outline" size="large"></ion-icon>
                         </a>
@@ -89,11 +93,12 @@
                     <hr style="color:black">
 
                     </header>
+                    {% block body %}
+                    {% endblock %}
                     <img class="poster" src="{% static 'images/logo.png' %}" alt="img01" />
         </div>
 
-        {% block body %}
-        {% endblock %}
+
 
         <div class="page">
         </div>
