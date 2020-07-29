@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+
 
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,7 +23,7 @@ from .decorators import *
 
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect('store')
+        return redirect('store:store')
     else:
         if request.method == "POST":
             form = CreateUserForm(request.POST)
@@ -44,7 +46,7 @@ def registerPage(request):
                     lastname=lastname,
                 )
                 messages.success(request, ('Registration Successful'))
-                return redirect('store')
+                return redirect('store:store')
 
         else:
             form = CreateUserForm()
@@ -67,23 +69,7 @@ def profile(request):
         context = {'orders': orders }
         return render(request, 'account/profile.html', context)
     else:
-        return redirect('store')
-
-
-
-
-
-
-
-
-
-
-login_required(login_url='login')
-def logout_user(request):
-    logout(request)
-    messages.success(request, ("You have been logged out successfully..."))
-    return redirect ('store')
-
+        return redirect('store:store')
 
 
 
@@ -109,23 +95,32 @@ def edit_profile(request):
 
 
 
+
+
+
+
+login_required(login_url='login')
+def logout_user(request):
+    logout(request)
+    messages.success(request, ("You have been logged out successfully..."))
+    return redirect ('home:home')
+
+
 def loginPage(request):
-    if request.user.is_authenticated:
-            return redirect('store')
-    else:
-        if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, ("You are now logged in."))
-                return redirect('store')
-            else:
-                messages.success(request, ("Error! Please try again..."))
-                return redirect('account:login')
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ("You are now logged in."))
+            return HttpResponseRedirect(request.POST.get('full_path'))
         else:
-            return render(request, 'account/login.html', {})
+            messages.success(request, ("Error! Please try again..."))
+            return redirect('account:login')
+    else:
+        return render(request, 'account/login.html', {})
 
 
 
@@ -140,7 +135,7 @@ def change_password(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, ('Your password has been successfully updated!'))
-                return redirect('store')
+                return redirect('store:store')
         else:
             form = PasswordChangeForm(user=request.user)
         context = {'form':  form}

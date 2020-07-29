@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'store_base.html' %}
 
 
 {% load static %}
@@ -31,7 +31,7 @@
     {% endfor %}
 
   </div>
-<a href="{% url 'cart' %}" class="">  <button class="cart"> <i class=" cart__icon fa fa-shopping-cart "></i>
+<a href="{% url 'store:cart' %}" class="">  <button class="cart"> <i class=" cart__icon fa fa-shopping-cart "></i>
       <span class="text-hidden">Shopping cart</span>
       <span class="cart__count">{{cartItems}}</span>
   </button></a>

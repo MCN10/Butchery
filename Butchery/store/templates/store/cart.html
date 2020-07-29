@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'store_base.html' %}
 
 
 {% load static %}
@@ -84,7 +84,7 @@
                     <hr>
 
                 </div>
-                <p><a href="{% url 'store' %}" class="btn action--button-btn">Continue Shopping&nbsp;&nbsp;</a>&nbsp;{% if order.get_cart_total%}<a {% if user.is_authenticated %} href="{% url 'checkout' %}" {% else %} href="{% url 'account:register' %}" {% endif %}class="btn action--button-btn">Proceed to Checkout &nbsp;&nbsp; </a>
+                <p><a href="{% url 'store:store' %}" class="btn action--button-btn">Continue Shopping&nbsp;&nbsp;</a>&nbsp;{% if order.get_cart_total%}<a {% if user.is_authenticated %} href="{% url 'store:checkout' %}" {% else %} href="{% url 'account:register' %}" {% endif %}class="btn action--button-btn">Proceed to Checkout &nbsp;&nbsp; </a>
                     {% endif %}</p>
             </div>
         </div>

@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'home',
     'store',
     'account',
     'crispy_forms',
+    'django_http_referrer_policy',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -53,7 +56,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_http_referrer_policy.middleware.ReferrerPolicyMiddleware',
+
 ]
+
+REFERRER_POLICY = 'no-referrer'
+
 
 ROOT_URLCONF = 'Butchery.urls'
 
